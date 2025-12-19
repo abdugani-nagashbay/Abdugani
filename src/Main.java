@@ -3,7 +3,7 @@ public class Main {
     public static void main(String[] args) {
 
        
-        Flight flight1 = new Flight("KC101", "Almaty", 3, 120.5);
+        Flight flight1 = new Flight("KC101", "Atyrau", 3, 120.5);
         Flight flight2 = new Flight("KC202", "Astana", 5, 95.0);
 
 
