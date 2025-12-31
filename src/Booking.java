@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Booking {
 
     private Passenger passenger;
@@ -13,30 +15,9 @@ public class Booking {
         this.confirmed = false;
     }
 
-    public Passenger getPassenger() {
-        return passenger;
-    }
-
-    public void setPassenger(Passenger passenger) {
-        this.passenger = passenger;
-    }
-
-    public Flight getFlight() {
-        return flight;
-    }
-
-    public void setFlight(Flight flight) {
-        this.flight = flight;
-    }
-
     public boolean isConfirmed() {
         return confirmed;
     }
-
-    public void setConfirmed(boolean confirmed) {
-        this.confirmed = confirmed;
-    }
-
 
     public void confirmBooking() {
         if (flight.getAvailableSeats() > 0) {
@@ -47,9 +28,29 @@ public class Booking {
     }
 
     public void printInfo() {
-        System.out.println("Booking → Passenger: " + passenger.getName() +
-                ", Flight: " + flight.getFlightNumber() +
-                ", Confirmed: " + confirmed);
+        System.out.println(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Booking{passenger=" + passenger.getName() +
+                ", flight=" + flight.getFlightNumber() +
+                ", confirmed=" + confirmed + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Booking)) return false;
+        Booking booking = (Booking) o;
+        return passenger.equals(booking.passenger) &&
+                flight.equals(booking.flight);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(passenger, flight);
     }
 }
+
 

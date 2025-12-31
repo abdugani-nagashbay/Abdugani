@@ -1,10 +1,11 @@
+import java.util.Objects;
+
 public class Flight {
 
     private String flightNumber;
     private String destination;
     private int availableSeats;
     private double price;
-
 
     public Flight() {
     }
@@ -16,39 +17,21 @@ public class Flight {
         this.price = price;
     }
 
-
     public String getFlightNumber() {
         return flightNumber;
-    }
-
-    public void setFlightNumber(String flightNumber) {
-        this.flightNumber = flightNumber;
     }
 
     public String getDestination() {
         return destination;
     }
 
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
     public int getAvailableSeats() {
         return availableSeats;
-    }
-
-    public void setAvailableSeats(int availableSeats) {
-        this.availableSeats = availableSeats;
     }
 
     public double getPrice() {
         return price;
     }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
 
     public void bookSeat() {
         if (availableSeats > 0) {
@@ -57,9 +40,27 @@ public class Flight {
     }
 
     public void printInfo() {
-        System.out.println("Flight → " + flightNumber +
-                ", Destination: " + destination +
-                ", Seats: " + availableSeats +
-                ", Price: $" + price);
+        System.out.println(this); //
+    }
+
+    @Override
+    public String toString() {
+        return "Flight{number='" + flightNumber +
+                "', destination='" + destination +
+                "', seats=" + availableSeats +
+                ", price=" + price + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Flight)) return false;
+        Flight flight = (Flight) o;
+        return flightNumber.equals(flight.flightNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(flightNumber);
     }
 }

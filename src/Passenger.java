@@ -1,32 +1,16 @@
-public class Passenger {
+import java.util.Objects;
 
-    private String name;
-    private int age;
+public class Passenger extends Person {
+
     private boolean hasTicket;
 
     public Passenger() {
+        super("", 0);
     }
 
     public Passenger(String name, int age, boolean hasTicket) {
-        this.name = name;
-        this.age = age;
+        super(name, age);
         this.hasTicket = hasTicket;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     public boolean hasTicket() {
@@ -38,8 +22,31 @@ public class Passenger {
     }
 
     public void printInfo() {
-        System.out.println("Passenger → Name: " + name +
-                ", Age: " + age +
-                ", Has ticket: " + hasTicket);
+        System.out.println(this);
+    }
+
+    @Override
+    public String getType() {
+        return "Passenger";
+    }
+
+    @Override
+    public String toString() {
+        return "Passenger{name='" + name +
+                "', age=" + age +
+                ", hasTicket=" + hasTicket + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Passenger)) return false;
+        Passenger that = (Passenger) o;
+        return age == that.age && name.equals(that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age);
     }
 }

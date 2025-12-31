@@ -1,52 +1,47 @@
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
 
-       
-        Flight flight1 = new Flight("KC101", "Atyrau", 3, 120.5);
-        Flight flight2 = new Flight("KC202", "Astana", 5, 95.0);
 
+        List<Flight> flights = new ArrayList<>();
+        flights.add(new Flight("KC101", "Atyrau", 3, 120.5));
+        flights.add(new Flight("KC202", "Astana", 5, 95.0));
+        flights.add(new Flight("KC303", "Almaty", 2, 150.0));
 
         Passenger p1 = new Passenger("Aruzhan", 20, false);
         Passenger p2 = new Passenger("Dias", 22, false);
 
-        Booking b1 = new Booking(p1, flight1);
-        Booking b2 = new Booking(p2, flight2);
-
-
-        System.out.println("=== FLIGHTS ===");
-        flight1.printInfo();
-        flight2.printInfo();
-
-        System.out.println("\n=== PASSENGERS ===");
-        p1.printInfo();
-        p2.printInfo();
-
-
-        System.out.println("\n=== BOOKING PROCESS ===");
+        Booking b1 = new Booking(p1, flights.get(0));
+        Booking b2 = new Booking(p2, flights.get(1));
 
         b1.confirmBooking();
         b2.confirmBooking();
 
-        if (b1.isConfirmed()) {
-            System.out.println("Booking 1 confirmed.");
-        } else {
-            System.out.println("Booking 1 failed.");
-        }
+        System.out.println("=== ALL FLIGHTS ===");
+        flights.forEach(System.out::println);
 
-        System.out.println("\n=== FLIGHT PRICE COMPARISON ===");
-        if (flight1.getPrice() > flight2.getPrice()) {
-            System.out.println("Flight 1 is more expensive.");
-        } else {
-            System.out.println("Flight 2 is cheaper.");
-        }
+        System.out.println("\n=== FILTER: price < 120 ===");
+        flights.stream()
+                .filter(f -> f.getPrice() < 120)
+                .forEach(System.out::println);
 
+        System.out.println("\n=== SORT BY PRICE ===");
+        flights.stream()
+                .sorted(Comparator.comparingDouble(Flight::getPrice))
+                .forEach(System.out::println);
 
-        System.out.println("\n=== ALL BOOKINGS ===");
-        Booking[] bookings = { b1, b2 };
+        System.out.println("\n=== SEARCH: Astana ===");
+        flights.stream()
+                .filter(f -> f.getDestination().equalsIgnoreCase("Astana"))
+                .forEach(System.out::println);
 
-        for (int i = 0; i < bookings.length; i++) {
-            bookings[i].printInfo();
-        }
+        System.out.println("\n=== BOOKINGS ===");
+        System.out.println(b1);
+        System.out.println(b2);
     }
 }
+
