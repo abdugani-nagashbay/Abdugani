@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class Main {
 
@@ -42,6 +45,13 @@ public class Main {
         System.out.println("\n=== BOOKINGS ===");
         System.out.println(b1);
         System.out.println(b2);
+        System.out.println("\n=== SAVE FLIGHTS TO DB ===");
+        flights.forEach(FlightDAO::saveFlight);
+
+        System.out.println("\n=== FLIGHTS FROM DATABASE ===");
+        List<Flight> dbFlights = FlightDAO.getAllFlights();
+        dbFlights.forEach(System.out::println);
+
     }
 }
 
