@@ -4,6 +4,7 @@ import java.util.List;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Connection;
 
 public class Main {
 
@@ -51,6 +52,14 @@ public class Main {
         System.out.println("\n=== FLIGHTS FROM DATABASE ===");
         List<Flight> dbFlights = FlightDAO.getAllFlights();
         dbFlights.forEach(System.out::println);
+        Connection conn = DatabaseConnection.getConnection();
+
+        if (conn != null) {
+            MenuService menu = new MenuService(conn);
+            menu.start(); // 🔥 МЕНЮ ОСЫ ЖЕРДЕН БАСТАЛАДЫ
+        } else {
+            System.out.println("Database connection failed!");
+        }
 
     }
 }
