@@ -1,3 +1,5 @@
+package kz.aitu.airline.dao;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 
@@ -12,9 +14,7 @@ public class DatabaseConnection {
         try {
             return DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }
-
